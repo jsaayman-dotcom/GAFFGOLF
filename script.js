@@ -18,7 +18,7 @@ const players = [
     { name: "Julian", played: 1, wins: 0, losses: 0, points: 25 },
     { name: "Liam", played: 3, wins: 1, losses: 1, points: 30 },
     { name: "Mark S", played: 2, wins: 1, losses: 0, points: 25 },
-    { name: "Small", played: 2, wins: 0, losses: 1, points: 20 },
+    { name: "Small", played: 3, wins: 1, losses: 1, points: 35 },
     { name: "Andy", played: 2, wins: 1, losses: 0, points: 15 },
     { name: "Bumrah", played: 3, wins: 2, losses: 0, points: 35 },
     { name: "Backpack", played: 2, wins: 1, losses: 1, points: 15 },
@@ -46,6 +46,8 @@ const players = [
     { name: "Ross", played: 1, wins: 0, losses: 0, points: 5 },
     { name: "Thaakira", played: 1, wins: 0, losses: 0, points: 5 },
     { name: "Wayne", played: 1, wins: 0, losses: 1, points: 5 }
+    { name: "Ian", played: 1, wins: 1, losses: 0, points: 20 },
+    { name: "Matt", played: 1, wins: 1, losses: 0, points: 20 }
 ];
 
 // ---------- ELEMENTS ----------
