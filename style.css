@@ -1,6 +1,6 @@
-/* ==========================
-   RESET
-========================== */
+/* ===================================
+   GAFF GOLFING SOCIETY
+=================================== */
 
 *{
     margin:0;
@@ -14,13 +14,13 @@ html{
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#f7f8fa;
+    background:#f4f6f8;
     color:#222;
 }
 
-/* ==========================
-   NAVBAR
-========================== */
+/* ===================================
+   NAVIGATION
+=================================== */
 
 nav{
     position:fixed;
@@ -33,166 +33,176 @@ nav{
     justify-content:space-between;
     align-items:center;
     padding:0 8%;
-    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
     z-index:1000;
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:15px;
 }
 
 .logo img{
     width:55px;
 }
 
-.logo h2{
+.logo span{
+    font-size:24px;
+    font-weight:700;
     color:#0B3D2E;
-    font-size:26px;
 }
 
 nav ul{
     display:flex;
     list-style:none;
-    gap:35px;
+    gap:30px;
 }
 
-nav ul li a{
+nav a{
     text-decoration:none;
     color:#333;
     font-weight:500;
     transition:.3s;
 }
 
-nav ul li a:hover{
+nav a:hover{
     color:#0B3D2E;
 }
 
-/* ==========================
+/* ===================================
    HERO
-========================== */
+=================================== */
 
 .hero{
-    height:100vh;
+
+    min-height:100vh;
+
     background:
-        linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
-        url(images/hero.jpg);
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("images/hero.jpg");
+
     background-size:cover;
     background-position:center;
+
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
+
     color:white;
+
+    padding:120px 20px 80px;
+
 }
 
 .hero-content{
-    max-width:750px;
-    padding:20px;
+
+    max-width:700px;
+
 }
 
 .hero-content img{
+
     width:180px;
-    margin-bottom:20px;
+
+    margin-bottom:25px;
+
 }
 
 .hero h1{
+
     font-size:60px;
+
     margin-bottom:15px;
+
 }
 
 .hero p{
+
     font-size:20px;
-    margin-bottom:35px;
-    color:#eee;
-}
 
-.hero button{
-    background:#D4AF37;
-    color:#111;
-    border:none;
-    padding:16px 38px;
-    border-radius:50px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.hero button:hover{
-    transform:translateY(-3px);
-    background:white;
-}
-
-/* ==========================
-   MOBILE
-========================== */
-
-@media(max-width:900px){
-
-    nav{
-        flex-direction:column;
-        height:auto;
-        padding:20px;
-    }
-
-    nav ul{
-        flex-wrap:wrap;
-        justify-content:center;
-        margin-top:20px;
-        gap:18px;
-    }
-
-    .hero h1{
-        font-size:40px;
-    }
-
-    .hero-content img{
-        width:130px;
-    }
-
-}
-/* ==========================
-   LEAGUE SECTION
-========================== */
-
-.league{
-    padding:100px 8%;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-}
-
-.league h2{
-    text-align:center;
-    color:#0B3D2E;
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.section-text{
-    text-align:center;
-    color:#666;
     margin-bottom:40px;
+
+    color:#f1f1f1;
+
 }
 
-/* Search */
+.button{
+
+    display:inline-block;
+
+    padding:16px 38px;
+
+    background:#D4AF37;
+
+    color:#111;
+
+    border-radius:40px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.button:hover{
+
+    background:white;
+
+    transform:translateY(-3px);
+
+}
+
+/* ===================================
+   SECTIONS
+=================================== */
+
+.section{
+
+    padding:100px 8%;
+
+}
+
+.section h2{
+
+    text-align:center;
+
+    font-size:40px;
+
+    color:#0B3D2E;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:40px;
+
+}
+
+/* ===================================
+   SEARCH
+=================================== */
 
 #search{
 
     width:100%;
-    padding:15px 20px;
+
+    padding:15px;
 
     border:none;
 
     border-radius:10px;
 
-    background:white;
-
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
 
     margin-bottom:25px;
 
@@ -200,9 +210,11 @@ nav ul li a:hover{
 
 }
 
-/* Table */
+/* ===================================
+   TABLE
+=================================== */
 
-.table-container{
+.table-wrapper{
 
     overflow-x:auto;
 
@@ -256,41 +268,70 @@ tbody tr{
 
 tbody tr:hover{
 
-    background:#f4faf5;
+    background:#eef8ef;
 
 }
-/* ==========================
-   RESULTS
-========================== */
 
-.results{
-    padding:100px 8%;
-}
+/* ===================================
+   FOOTER
+=================================== */
 
-.results-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
+footer{
 
-.result-card{
-    background:#fff;
-    padding:35px;
-    border-radius:15px;
+    background:#0B3D2E;
+
+    color:white;
+
     text-align:center;
-    box-shadow:0 8px 25px rgba(0,0,0,.08);
-    transition:.3s;
+
+    padding:35px;
+
 }
 
-.result-card:hover{
-    transform:translateY(-6px);
-}
+/* ===================================
+   MOBILE
+=================================== */
 
-.result-card h3{
-    color:#0B3D2E;
-    margin-bottom:15px;
-}
+@media(max-width:900px){
 
-.result-card p{
-    color:#666;
+    nav{
+
+        flex-direction:column;
+
+        height:auto;
+
+        padding:20px;
+
+    }
+
+    nav ul{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:15px;
+
+        margin-top:15px;
+
+    }
+
+    .hero h1{
+
+        font-size:42px;
+
+    }
+
+    .hero p{
+
+        font-size:17px;
+
+    }
+
+    .hero-content img{
+
+        width:130px;
+
+    }
+
 }
