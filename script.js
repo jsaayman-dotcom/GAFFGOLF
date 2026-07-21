@@ -72,3 +72,35 @@ search.addEventListener("keyup", () => {
     displayPlayers(filtered);
 
 });
+/* ===================================
+   RESULTS
+=================================== */
+
+.results-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.result-card{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.result-card:hover{
+    transform:translateY(-8px);
+}
+
+.result-card h3{
+    color:#0B3D2E;
+    margin-bottom:20px;
+}
+
+.result-card p{
+    color:#666;
+    font-size:17px;
+}
