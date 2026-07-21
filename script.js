@@ -1,6 +1,9 @@
-// ==========================
-// GAFF League Data
-// ==========================
+// ======================================
+// GAFF GOLFING SOCIETY
+// script.js
+// ======================================
+
+// ---------- PLAYERS ----------
 
 const players = [
     {
@@ -24,23 +27,42 @@ const players = [
         losses: 1,
         points: 45
     }
+
+    // Add the rest of your players here
 ];
 
-// ==========================
-// Build League Table
-// ==========================
+// ---------- ELEMENTS ----------
 
 const tableBody = document.querySelector("#leagueTable tbody");
+const search = document.getElementById("search");
+
+// ---------- DISPLAY TABLE ----------
 
 function displayPlayers(playerList) {
 
     tableBody.innerHTML = "";
 
-    playerList.forEach((player, index) => {
+    const sortedPlayers = [...playerList].sort((a, b) => {
+
+        if (b.points !== a.points) {
+            return b.points - a.points;
+        }
+
+        return b.wins - a.wins;
+
+    });
+
+    sortedPlayers.forEach((player, index) => {
+
+        let medal = "";
+
+        if (index === 0) medal = "🥇";
+        else if (index === 1) medal = "🥈";
+        else if (index === 2) medal = "🥉";
 
         tableBody.innerHTML += `
             <tr>
-                <td>${index + 1}</td>
+                <td>${medal} ${index + 1}</td>
                 <td>${player.name}</td>
                 <td>${player.played}</td>
                 <td>${player.wins}</td>
@@ -53,54 +75,44 @@ function displayPlayers(playerList) {
 
 }
 
-displayPlayers(players);
+// ---------- SEARCH ----------
 
-// ==========================
-// Search Players
-// ==========================
-
-const search = document.getElementById("search");
-
-search.addEventListener("keyup", () => {
+search.addEventListener("keyup", function () {
 
     const value = search.value.toLowerCase();
 
-    const filtered = players.filter(player =>
+    const filteredPlayers = players.filter(player =>
         player.name.toLowerCase().includes(value)
     );
 
-    displayPlayers(filtered);
+    displayPlayers(filteredPlayers);
 
 });
-/* ===================================
-   RESULTS
-=================================== */
 
-.results-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+// ---------- STATISTICS ----------
+
+function updateStatistics() {
+
+    const sorted = [...players].sort((a, b) => b.points - a.points);
+
+    const leader = document.getElementById("leader");
+    const rounds = document.getElementById("roundsPlayed");
+
+    if (leader) {
+        leader.textContent = sorted[0]?.name || "-";
+    }
+
+    if (rounds) {
+
+        const maxRounds = Math.max(...players.map(player => player.played));
+
+        rounds.textContent = maxRounds;
+
+    }
+
 }
 
-.result-card{
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-}
+// ---------- LOAD PAGE ----------
 
-.result-card:hover{
-    transform:translateY(-8px);
-}
-
-.result-card h3{
-    color:#0B3D2E;
-    margin-bottom:20px;
-}
-
-.result-card p{
-    color:#666;
-    font-size:17px;
-}
+displayPlayers(players);
+updateStatistics();
