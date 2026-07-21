@@ -97,6 +97,7 @@ nav a:hover::after{
 .hero{
     position:relative;
     min-height:100vh;
+    padding-top:90px;
     background:url("images/hero.jpg") center center/cover no-repeat;
     display:flex;
     justify-content:center;
@@ -201,9 +202,6 @@ nav a:hover::after{
     color:white;
 }
 
-.hero{
-    padding-top:90px;
-}
 /* ===================================
    SECTIONS
 =================================== */
@@ -277,9 +275,6 @@ table{
 thead{
     background:#0B3D2E;
     color:white;
-    position:sticky;
-    top:80px;
-    z-index:5;
 }
 
 th{
@@ -324,7 +319,40 @@ td:last-child{
     color:#0B3D2E;
     font-weight:700;
 }
+/* ===================================
+   RESULTS
+=================================== */
 
+.results-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:40px;
+}
+
+.result-card{
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    transition:.3s;
+    text-align:center;
+}
+
+.result-card:hover{
+    transform:translateY(-8px);
+}
+
+.result-card h3{
+    color:#0B3D2E;
+    margin-bottom:15px;
+    font-size:22px;
+}
+
+.result-card p{
+    color:#666;
+    font-size:18px;
+}
 /* ===================================
    FOOTER
 =================================== */
