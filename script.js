@@ -45,7 +45,7 @@ const players = [
     { name: "Mo", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Ross", played: 1, wins: 0, losses: 0, points: 5 },
     { name: "Thaakira", played: 1, wins: 0, losses: 0, points: 5 },
-    { name: "Wayne", played: 1, wins: 0, losses: 1, points: 5 }
+    { name: "Wayne", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Ian", played: 1, wins: 1, losses: 0, points: 20 },
     { name: "Matt", played: 1, wins: 1, losses: 0, points: 20 }
 ];
