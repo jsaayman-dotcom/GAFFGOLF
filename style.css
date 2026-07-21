@@ -215,65 +215,70 @@ nav a:hover{
 }
 
 /* ===================================
-   TABLE
+   LEAGUE TABLE
 =================================== */
 
 .table-wrapper{
-
     overflow-x:auto;
-
-    background:white;
-
-    border-radius:15px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 }
 
 table{
-
     width:100%;
-
     border-collapse:collapse;
-
 }
 
 thead{
-
     background:#0B3D2E;
-
     color:white;
-
+    position:sticky;
+    top:80px;
+    z-index:5;
 }
 
 th{
-
-    padding:18px;
-
-    font-weight:600;
-
+    padding:20px;
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
 td{
-
     padding:18px;
-
     text-align:center;
-
     border-bottom:1px solid #eee;
-
+    font-size:15px;
 }
 
 tbody tr{
-
-    transition:.3s;
-
+    transition:.25s;
 }
 
 tbody tr:hover{
-
     background:#eef8ef;
+    transform:scale(1.01);
+}
 
+tbody tr:nth-child(1){
+    background:#FFF8DC;
+    font-weight:700;
+}
+
+tbody tr:nth-child(2){
+    background:#F2F2F2;
+    font-weight:700;
+}
+
+tbody tr:nth-child(3){
+    background:#F6E3C5;
+    font-weight:700;
+}
+
+td:last-child{
+    color:#0B3D2E;
+    font-weight:700;
 }
 
 /* ===================================
