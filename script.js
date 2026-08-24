@@ -50,7 +50,7 @@ const players = [
     { name: "Matt", played: 1, wins: 1, losses: 0, points: 20 },
     { name: "Shark", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Marnu", played: 1, wins: 0, losses: 1, points: 5 },
-    { name: "Matt S", played: 1, wins: 1, losses: 0, points: 35 },
+    { name: "Matt S", played: 2, wins: 1, losses: 0, points: 35 },
     { name: "Hayden", played: 1, wins: 1, losses: 0, points: 5 },
     { name: "Bena B", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Ricky", played: 1, wins: 0, losses: 1, points: 5 },
