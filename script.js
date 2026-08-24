@@ -55,7 +55,7 @@ const players = [
     { name: "Bena B", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Ricky", played: 1, wins: 0, losses: 1, points: 5 },
     { name: "Bradley", played: 1, wins: 0, losses: 1, points: 20 },
-    { name: "Dazza", played: 1, wins: 0, losses: 1, points: 5 },
+    { name: "Dazza", played: 1, wins: 0, losses: 1, points: 5 }
 ];
 
 // ---------- ELEMENTS ----------
