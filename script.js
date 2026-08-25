@@ -21,7 +21,7 @@ const players = [
     { name: "Small", played: 4, wins: 1, losses: 2, points: 40 },
     { name: "Andy", played: 3, wins: 1, losses: 1, points: 20 },
     { name: "Bumrah", played: 4, wins: 2, losses: 0, points: 40 },
-    { name: "Backpack", played: 3, wins: 1, losses: 3, points: 25 },
+    { name: "Backpack", played: 3, wins: 1, losses: 2, points: 25 },
     { name: "Bruce", played: 3, wins: 1, losses: 2, points: 20 },
     { name: "Bryce", played: 4, wins: 2, losses: 1, points: 35 },
     { name: "Choppo", played: 4, wins: 1, losses: 1, points: 25 },
