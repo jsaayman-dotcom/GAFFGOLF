@@ -779,3 +779,373 @@ document.addEventListener("keydown", event => {
 
 displayPlayers(players);
 updateStatistics();
+
+/* ===================================
+   GAFF GOLF COURSE RESULTS POPUPS
+=================================== */
+
+const gaffCourses = {
+    "little-walmer": {
+        name: "Little Walmer",
+        image: "images/little-walmer.jpg",
+        format: "Scramble",
+        results: [
+            ["Winner", "To be confirmed"],
+            ["Second Place", "To be confirmed"],
+            ["Third Place", "To be confirmed"],
+            ["Longest Drive", "To be confirmed"],
+            ["Closest to Pin", "To be confirmed"]
+        ]
+    },
+
+    "wedgewood": {
+        name: "Wedgewood",
+        image: "images/wedgewood.jpg",
+        format: "2v2 Scramble",
+        results: [
+            ["Winner", "To be confirmed"],
+            ["Second Place", "To be confirmed"],
+            ["Third Place", "To be confirmed"],
+            ["Longest Drive", "To be confirmed"],
+            ["Closest to Pin", "To be confirmed"]
+        ]
+    },
+
+    "uitenhage": {
+        name: "Uitenhage",
+        image: "images/uitenhage.jpg",
+        format: "Individual Points Stableford",
+        results: [
+            ["Winner", "To be confirmed"],
+            ["Second Place", "To be confirmed"],
+            ["Third Place", "To be confirmed"],
+            ["Closest to Pin", "To be confirmed"],
+            ["Closest to Pin 2", "To be confirmed"]
+        ]
+    },
+
+    "hankey": {
+        name: "Hankey",
+        image: "images/hankey.jpg",
+        format: "Individual",
+        results: [
+            ["1st Place", "Usaamah"],
+            ["2nd Place", "Darren"],
+            ["3rd Place", "Langes"],
+            ["4th Place", "Brad"],
+            ["5th Place", "Jade"],
+            ["Longest Drive", "Jade"],
+            ["Closest to Pin", "Zeke & Imi"]
+        ]
+    },
+
+    "sardinia-bay": {
+        name: "Sardinia Bay",
+        image: "images/sardinia-bay.jpg",
+        format: "2v2 Scramble",
+        note: "The round was decided by a playoff.",
+        results: [
+            ["Winner", "Backpack & Matt S"],
+            ["Second Place", "Beninho & Langes"],
+            ["Longest Drive", "To be confirmed"],
+            ["Closest to Pin", "To be confirmed"]
+        ]
+    },
+
+    "humewood": {
+        name: "Humewood",
+        image: "images/humewood.jpg",
+        format: "Best Drive 4 Ball",
+        results: [
+            ["1st Place", "Jade, Bird, Liam & Aaron"],
+            ["2nd Place", "Mark S, Bruce, Bryce & Wayne"],
+            ["3rd Place", "Zeke, Khalo, Ryan & Lance"],
+            ["Longest Drive", "Jade"],
+            ["Closest to Pin", "Cole"]
+        ]
+    }
+};
+
+/* ---------- POPUP STYLES ---------- */
+
+(function addCoursePopupStyles() {
+    if (document.getElementById("gaff-course-popup-styles")) return;
+
+    const style = document.createElement("style");
+    style.id = "gaff-course-popup-styles";
+
+    style.textContent = `
+        .gaff-course-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .gaff-course-modal.is-open {
+            display: flex;
+        }
+
+        .gaff-course-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(4, 20, 14, .82);
+            backdrop-filter: blur(5px);
+        }
+
+        .gaff-course-dialog {
+            position: relative;
+            z-index: 1;
+            width: min(720px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #F5F2E8;
+            color: #243229;
+            border: 1px solid #C5A45D;
+            border-radius: 14px;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .35);
+        }
+
+        .gaff-course-image {
+            display: block;
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            background: #0B3D2E;
+        }
+
+        .gaff-course-body {
+            padding: clamp(20px, 4vw, 32px);
+        }
+
+        .gaff-course-eyebrow {
+            margin: 0 0 6px;
+            color: #8A7136;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .gaff-course-title {
+            margin: 0;
+            color: #0B3D2E;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(28px, 5vw, 38px);
+            line-height: 1.2;
+        }
+
+        .gaff-course-format {
+            margin: 10px 0 22px;
+            color: #657268;
+            font-size: 14px;
+        }
+
+        .gaff-course-results {
+            display: grid;
+            gap: 10px;
+        }
+
+        .gaff-course-result {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 14px 16px;
+            background: #FBFAF5;
+            border: 1px solid #DED7C6;
+            border-radius: 8px;
+        }
+
+        .gaff-course-result strong {
+            color: #0B3D2E;
+            font-size: 13px;
+        }
+
+        .gaff-course-result span {
+            color: #465249;
+            font-size: 14px;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .gaff-course-note {
+            margin: 16px 0 0;
+            color: #657268;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .gaff-course-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(197, 164, 93, .8);
+            border-radius: 50%;
+            background: #F5F2E8;
+            color: #0B3D2E;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        .gaff-course-close:hover {
+            background: #E1CC91;
+        }
+
+        body.gaff-course-open {
+            overflow: hidden;
+        }
+
+        @media (max-width: 520px) {
+            .gaff-course-modal {
+                padding: 10px;
+            }
+
+            .gaff-course-dialog {
+                max-height: 94vh;
+            }
+
+            .gaff-course-image {
+                height: 175px;
+            }
+
+            .gaff-course-result {
+                padding: 12px;
+                gap: 10px;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+})();
+
+/* ---------- CREATE COURSE POPUP ---------- */
+
+const courseModal = document.createElement("div");
+
+courseModal.className = "gaff-course-modal";
+courseModal.id = "gaffCourseResults";
+courseModal.setAttribute("aria-hidden", "true");
+
+courseModal.innerHTML = `
+    <div class="gaff-course-backdrop" data-course-close></div>
+
+    <section
+        class="gaff-course-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gaffCourseTitle"
+        tabindex="-1">
+
+        <button
+            type="button"
+            class="gaff-course-close"
+            aria-label="Close course results"
+            data-course-close>&times;</button>
+
+        <div class="gaff-course-content"></div>
+    </section>
+`;
+
+document.body.appendChild(courseModal);
+
+const courseContent = courseModal.querySelector(".gaff-course-content");
+const courseDialog = courseModal.querySelector(".gaff-course-dialog");
+
+let lastCourseTrigger = null;
+
+/* ---------- OPEN COURSE POPUP ---------- */
+
+function openCoursePopup(course, trigger) {
+    lastCourseTrigger = trigger;
+
+    const resultsHTML = course.results.map(([label, value]) => `
+        <div class="gaff-course-result">
+            <strong>${escapeHTML(label)}</strong>
+            <span>${escapeHTML(value)}</span>
+        </div>
+    `).join("");
+
+    courseContent.innerHTML = `
+        <img
+            class="gaff-course-image"
+            src="${escapeHTML(course.image)}"
+            alt="${escapeHTML(course.name)} Golf Course"
+            onerror="this.style.display='none';">
+
+        <div class="gaff-course-body">
+            <p class="gaff-course-eyebrow">GAFF Golfing Society</p>
+
+            <h2 class="gaff-course-title" id="gaffCourseTitle">
+                ${escapeHTML(course.name)}
+            </h2>
+
+            <p class="gaff-course-format">
+                <strong>Game Format:</strong>
+                ${escapeHTML(course.format)}
+            </p>
+
+            <div class="gaff-course-results">
+                ${resultsHTML}
+            </div>
+
+            ${course.note
+                ? `<p class="gaff-course-note">${escapeHTML(course.note)}</p>`
+                : ""}
+        </div>
+    `;
+
+    courseModal.classList.add("is-open");
+    courseModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("gaff-course-open");
+
+    courseModal.querySelector(".gaff-course-close").focus();
+}
+
+/* ---------- COURSE CARD CLICKS ---------- */
+
+const coursesGrid = document.getElementById("coursesGrid");
+
+if (coursesGrid) {
+    coursesGrid.addEventListener("click", event => {
+        const card = event.target.closest(".course-card");
+        if (!card) return;
+
+        const course = gaffCourses[card.dataset.course];
+        if (course) openCoursePopup(course, card);
+    });
+}
+
+/* ---------- CLOSE COURSE POPUP ---------- */
+
+function closeCoursePopup() {
+    courseModal.classList.remove("is-open");
+    courseModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("gaff-course-open");
+
+    if (lastCourseTrigger) {
+        lastCourseTrigger.focus();
+    }
+}
+
+courseModal.addEventListener("click", event => {
+    if (event.target.closest("[data-course-close]")) {
+        closeCoursePopup();
+    }
+});
+
+document.addEventListener("keydown", event => {
+    if (
+        event.key === "Escape" &&
+        courseModal.classList.contains("is-open")
+    ) {
+        closeCoursePopup();
+    }
+});
