@@ -84,6 +84,43 @@ const players = [
     seasonNote: ""
 }));
 
+const playerProfileUpdates = {
+    "Bird": { dob: "2001-08-28", handicap: "16", firstPlaceFinishes: 1, podiumFinishes: 1, longestDriveAwards: 0, closestToPinAwards: 0, personalBest: "89 - Humewood" },
+    "Backpack": { dob: "2003-08-18", handicap: "22", firstPlaceFinishes: 1, podiumFinishes: 1, personalBest: "89 - Little Walmer" },
+    "Ejaaz": { dob: "2000-06-14", handicap: "12", firstPlaceFinishes: 0, podiumFinishes: 1, closestToPinAwards: 1, personalBest: "Wedgewood" },
+    "Gus": { dob: "1996-12-12", handicap: "7", firstPlaceFinishes: 1, podiumFinishes: 2, longestDriveAwards: 1, personalBest: "76 - Uitenhage" },
+    "Matt S": { dob: "1999-03-19", handicap: "18", firstPlaceFinishes: 1, podiumFinishes: 1, longestDriveAwards: 1, personalBest: "85 - Hankey" },
+    "Angelo": { dob: "1992-03-10", handicap: "24.3", firstPlaceFinishes: 1, podiumFinishes: 1, personalBest: "Wedgewood" },
+    "Sanu": { dob: "1990-08-08", handicap: "21", personalBest: "Unsure" },
+    "Lance": { handicap: "17", podiumFinishes: 1, personalBest: "83 - Sards" },
+    "Zeke": { dob: "2005-08-04", handicap: "N/A", podiumFinishes: 1, closestToPinAwards: 1, personalBest: "95 - Humewood" },
+    "Bumrah": { dob: "2003-12-05", handicap: "26", firstPlaceFinishes: 3, personalBest: "86 - Sards" },
+    "Shaq": { dob: "2001-03-08", handicap: "18", firstPlaceFinishes: 2, personalBest: "98 - Humewood" },
+    "Jayden": { dob: "2001-06-28", handicap: "21.3", firstPlaceFinishes: 3, podiumFinishes: 1, personalBest: "N/A" },
+    "Virgil": { dob: "1989-05-09", handicap: "18", personalBest: "85 - PEGC" },
+    "Miyaaz": { dob: "2008-08-19", handicap: "18.9", personalBest: "90 - Walmer" },
+    "Imi": { dob: "2000-01-16", handicap: "18", firstPlaceFinishes: 1, podiumFinishes: 1, personalBest: "78 - Sards" },
+    "Liam": { handicap: "17", firstPlaceFinishes: 1, podiumFinishes: 2, personalBest: "88 - Kragga Karma" },
+    "Bryce": { dob: "2000-10-17", handicap: "N/A", podiumFinishes: 3, personalBest: "87" },
+    "Siraj": { dob: "1963-09-04", handicap: "24.6", firstPlaceFinishes: 1, podiumFinishes: 2, personalBest: "85 - Royal Port Alfred" },
+    "Choppo": { dob: "2001-04-22", handicap: "N/A", personalBest: "All of them" },
+    "Kareem": { dob: "1995-11-24", handicap: "18", personalBest: "Humewood" },
+    "Chad S": { dob: "1996-08-13", handicap: "16", firstPlaceFinishes: 2, podiumFinishes: 2, longestDriveAwards: 1, personalBest: "81" },
+    "Ricky": { dob: "1999-11-07", handicap: "N/A", firstPlaceFinishes: 1, personalBest: "112 - Sards" },
+    "Small": { dob: "1999-04-24", handicap: "19", podiumFinishes: 1, personalBest: "Humewood" },
+    "Cole": { dob: "2000-06-28", handicap: "N/A", podiumFinishes: 1, closestToPinAwards: 2, personalBest: "92 - PEGC" },
+    "Langes": { dob: "1997-01-30", handicap: "8.8 index", firstPlaceFinishes: 4, podiumFinishes: 3, longestDriveAwards: 1, closestToPinAwards: 2, personalBest: "80 - Humewood" },
+    "Jade": { dob: "1996-04-08", handicap: "14", firstPlaceFinishes: 1, podiumFinishes: 3, longestDriveAwards: 2, closestToPinAwards: 1, personalBest: "85 - Humewood" },
+    "Khalo": { dob: "2005-08-22", handicap: "N/A", podiumFinishes: 1, personalBest: "Wedgewood" },
+    "Ryan": { dob: "2001-06-04", handicap: "9", podiumFinishes: 1, personalBest: "72 - Royal Port Alfred" },
+    "Gerrick": { dob: "2003-10-03", handicap: "N/A", firstPlaceFinishes: 1, personalBest: "N/A" }
+};
+
+players.forEach(player => {
+    const details = playerProfileUpdates[player.name];
+    if (details) Object.assign(player, details);
+});
+
 // ---------- ELEMENTS ----------
 
 const tableBody = document.querySelector("#leagueTable tbody");
@@ -559,7 +596,13 @@ function getInitials(name) {
         .toUpperCase();
 }
 
+
 function buildPlayerProfile(player) {
+    const showValue = value =>
+        value !== undefined && value !== null && String(value).trim() !== ""
+            ? escapeHTML(String(value))
+            : "Not added yet";
+
     const badgesHTML = achievementBadges.map(badge => {
         const earned = badge.earned(player);
 
@@ -602,86 +645,66 @@ function buildPlayerProfile(player) {
 
         <section class="gaff-profile-section">
             <h3>Player Information</h3>
-
             <div class="gaff-profile-detail-grid">
                 <div class="gaff-profile-detail">
                     <span>Date of birth</span>
-                    <strong>${profileValue(player.dob)}</strong>
+                    <strong>${showValue(player.dob)}</strong>
                 </div>
-
                 <div class="gaff-profile-detail">
                     <span>Age</span>
                     <strong>${calculateAge(player.dob)}</strong>
                 </div>
-
                 <div class="gaff-profile-detail">
                     <span>Handicap</span>
-                    <strong>${profileValue(player.handicap)}</strong>
+                    <strong>${showValue(player.handicap)}</strong>
                 </div>
-
-                <div class="gaff-profile-detail">
-                    <span>Home course</span>
-                    <strong>${profileValue(player.homeCourse)}</strong>
-                </div>
-
                 <div class="gaff-profile-detail">
                     <span>Games played</span>
-                    <strong>${player.played}</strong>
+                    <strong>${showValue(player.played)}</strong>
                 </div>
-
                 <div class="gaff-profile-detail">
                     <span>Personal best</span>
-                    <strong>${profileValue(player.personalBest)}</strong>
+                    <strong>${showValue(player.personalBest)}</strong>
                 </div>
             </div>
         </section>
 
         <section class="gaff-profile-section">
             <h3>Performance & Achievements</h3>
-
             <div class="gaff-profile-stat-grid">
                 <div class="gaff-profile-stat">
                     <span>League wins</span>
-                    <strong>${player.wins}</strong>
+                    <strong>${showValue(player.wins)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
                     <span>1st Place Finishes</span>
-                    <strong>${player.firstPlaceFinishes}</strong>
+                    <strong>${showValue(player.firstPlaceFinishes)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
                     <span>Podium Finishes</span>
-                    <strong>${player.podiumFinishes}</strong>
+                    <strong>${showValue(player.podiumFinishes)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
                     <span>Losses</span>
-                    <strong>${player.losses}</strong>
+                    <strong>${showValue(player.losses)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
                     <span>League points</span>
-                    <strong>${player.points}</strong>
+                    <strong>${showValue(player.points)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
-                    <span>Longest Drive awards</span>
-                    <strong>${player.longestDriveAwards}</strong>
+                    <span>Longest Drive Awards</span>
+                    <strong>${showValue(player.longestDriveAwards)}</strong>
                 </div>
-
                 <div class="gaff-profile-stat">
-                    <span>Closest to Pin awards</span>
-                    <strong>${player.closestToPinAwards}</strong>
+                    <span>Closest to Pin Awards</span>
+                    <strong>${showValue(player.closestToPinAwards)}</strong>
                 </div>
             </div>
 
             <p class="gaff-profile-note">
-                The league statistics above retain the existing records.
-                The new first-place, podium and award categories are
-                placeholders until verified achievement data is entered.
-                A zero in these new categories does not mean the player
-                has never achieved that result.
+                League statistics are kept separate from achievement
+                records. Missing information is shown as not added yet.
             </p>
         </section>
 
@@ -698,6 +721,7 @@ function buildPlayerProfile(player) {
             : ""}
     `;
 }
+
 
 function openPlayerProfile(player, trigger) {
     lastProfileTrigger = trigger;
