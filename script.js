@@ -11,7 +11,7 @@
 const players = [
     { name: "Anrich", played: 1, wins: 1, losses: 0, points: 50 },
     { name: "Chad S", played: 7, wins: 3, losses: 4, points: 145 },
-    { name: "Langes", played: 7, wins: 4, losses: 2, points: 180 },
+    { name: "Langes", played: 7, wins: 4, losses: 3, points: 180 },
     { name: "Gus", played: 3, wins: 3, losses: 0, points: 95 },
     { name: "Angelo", played: 4, wins: 1, losses: 3, points: 45 },
     { name: "Mick", played: 2, wins: 2, losses: 0, points: 40 },
